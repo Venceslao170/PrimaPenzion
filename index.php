@@ -1,12 +1,11 @@
 <?php
-//tento soubor nam pripoji vsehcny composer php knihovny
 require_once "./vendor/autoload.php";
 require_once "./data.php";
 
 $idStranky = array_keys($poleStranek)[0];
 
 if (array_key_exists("id-stranky", $_GET)) {
-    //http://localhost/tonda/2023-08-29/primapenzion/index.php?id-stranky=galerie
+  
     $idStranky = $_GET["id-stranky"];
 }
 
@@ -21,10 +20,7 @@ if (array_key_exists("id-stranky", $_GET)) {
     <title><?php echo $poleStranek[$idStranky]->getTitulek(); ?></title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/all.min.css">
-
-    <!--Tzv. favicona se zobrazuje jako vlastní ikona v záložce (kartě) stránky v prohlížeči; má být umístěna ve stejné složce jako soubor index.html-->
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
@@ -62,18 +58,12 @@ if (array_key_exists("id-stranky", $_GET)) {
 
     <section>
 
-        <?php
-        
-            //nejprve si vytahneme z databaze obsah stranky se vsema odznackama shortcodu
+        <?php               
 
         $rawObsah = $poleStranek[$idStranky]->getObsah();
-
-            //prozeneme nas obsah stranky specialni funkci, ktera najde vsechny shortcode odznacky a nahradi je za php soubory
         echo
         primakurzy\Shortcode\Processor::process('./moje-pluginy', $rawObsah);
 
-        //starý způsob
-        //require "./$idStranky.html";
         ?>
 
     </section>
