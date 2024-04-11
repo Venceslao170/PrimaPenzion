@@ -2,14 +2,12 @@
 session_start();
 require_once "./data.php";
 
-//vychozi hodnoty
 $aktivniInstance = null;
 
 if (array_key_exists("login-submit", $_POST)) {
 	$jmenoUzivatele = $_POST["uzivatelske-jmeno"];
 	$hesloUzivatele = $_POST["uzivatelske-heslo"];
 	if ($jmenoUzivatele == "admin" && $hesloUzivatele == "cici123") {
-		//vytvorit zaznam do sessiony
 		$_SESSION["jePrihlasen"] = $jmenoUzivatele;
 	}
 }
@@ -24,7 +22,7 @@ if (array_key_exists("logout-submit", $_GET)) {
 if (array_key_exists("jePrihlasen", $_SESSION)) {
 
 	//zpracování ajax formuláře
-	//uzivatel chce zaktualizovat poradi stranek
+	
 	if(array_key_exists("poleSerazenychId",$_POST)){
 		$poleId = $_POST["poleSerazenychId"];
 		Stranka::seradStranky($poleId);
@@ -39,7 +37,7 @@ if (array_key_exists("jePrihlasen", $_SESSION)) {
 		$idStranky = $_GET["delete"];
 
 		$poleStranek[$idStranky]->smazSE();
-		//procistit url a presmerovat uzivatel na hlavni stranku admin
+		
 		header("Location: ?");
 		exit;
 	}
@@ -49,20 +47,20 @@ if (array_key_exists("jePrihlasen", $_SESSION)) {
 		$aktivniInstance = new Stranka("", "", "", "");
 	}
 	//chce editovat stranku
+	
 	if (array_key_exists("edit", $_GET)) {
 		$idStranky = $_GET["edit"];
 		$aktivniInstance = $poleStranek[$idStranky];
 	}
+	
 	//uzivatel chce stranku ulozit
 	if (array_key_exists("aktualizovat-submit", $_POST)) {
 		$idStranky = trim($_POST["id-stranky"]);
 		$titulekStranky = trim($_POST["titulek-stranky"]);
 		$menuStranky = trim($_POST["menu-stranky"]);
 		$obrazekStranky = trim($_POST["obrazek-stranky"]);
-		//trim odstraní mezery před a za
-		//kontrola zda id neni prazdne
+		
 		if ($idStranky == "") {
-			//zadal prazdne id tak ho hned presmerujeme na uvodni stranku bez ulozeni
 			header("Location: ?");
 			exit;
 		}
@@ -75,9 +73,7 @@ if (array_key_exists("jePrihlasen", $_SESSION)) {
 
 		$obsahStranky = $_POST["obsah-stranky"];
 		$aktivniInstance->setObsah($obsahStranky);
-
-		//po tom co jsme vse aktualizovali v DB tak ho musme presmerovat na spravnou url
-		//v te stare url je porad stare id
+	
 		header("Location: ?edit={$aktivniInstance->getId()}");
 		exit;
 	}
@@ -156,19 +152,18 @@ if (array_key_exists("jePrihlasen", $_SESSION)) {
 			</form>
 			<script src="./vendor/tinymce/tinymce/tinymce.js"></script>
 			<script>
-				//zde bude kod, ktery zaktivuje tinymce(nahore jsme pripojili javasript knihovnu(cdn link))
 				tinymce.init({
-					selector: '#kocka', //pro kterou textareu to chci.. muzu napsat textarea -- to mi zmeni vsechny textarey na wysiwyg
+					selector: '#kocka', 
 					entity_encoding: 'raw',
 					plugins: ["code", "responsivefilemanager", "image", "anchor", "autolink", "autoresize", "link", "media", "lists"], //aktivujeme je zde, pluginy tinymce uz obsahuje
 					toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat', //řádky nástrojů
 					toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
-					cleanup: false, //autocorect
-					verify_html: false, //hledá chyby v html
+					cleanup: false,
+					verify_html: false, 
 					content_css: [
 						'./css/all.min.css',
 						'./css/style.css'
-					], //stylování fonty
+					], 
 					external_plugins: {
 						'responsivefilemanager': '<?php echo dirname($_SERVER['PHP_SELF']); ?>/vendor/primakurzy/responsivefilemanager/tinymce/plugins/responsivefilemanager/plugin.min.js',
 					},
