@@ -1,0 +1,14 @@
+# toto je komentář
+
+# teď http://localhost/xxx/php/2023-09-11/primapenzion/index.php?id-stranky=galerie
+
+#		toto je ukazka url jakou uzivatel navstivi
+# http://www.primapenzion/galerie
+#		toto je url kterou nas server dostane
+# http://www.primapenzion/index.php?id-stranky=galerie
+
+# zapneme přepisovač url
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.+) index.php?id-stranky=$1 [L,QSA]
