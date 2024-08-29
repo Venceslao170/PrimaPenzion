@@ -12,5 +12,5 @@ CREATE TABLE stranka(
 
 DESC stranka;
 
-INSERT INTO stranka SET id="kocka", titulek= "mnau", menu="cici", obrazek="primapenzion-main.jpg", obsah="mnau mnau mnau", poradi= 0;
+INSERT INTO stranka SET id="kocka", titulek= "mnau", menu="cici", obrazek="primapenzion-main.jpg", obsah="mnau", poradi= 0;
 
