@@ -53,7 +53,7 @@ class Stranka {
 		$prikaz->execute(array($this->id));
 	}
 	
-	//GETTERY
+	//GET&SET
 	function getId(){
 		return $this->id;
 	}
