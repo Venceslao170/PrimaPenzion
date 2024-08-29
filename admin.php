@@ -21,6 +21,7 @@ if (array_key_exists("logout-submit", $_GET)) {
 //kontrolujeme zda je prihlaseny
 if (array_key_exists("jePrihlasen", $_SESSION)) {
 
+	
 	//zpracování ajax formuláře
 	
 	if(array_key_exists("poleSerazenychId",$_POST)){
@@ -42,12 +43,12 @@ if (array_key_exists("jePrihlasen", $_SESSION)) {
 		exit;
 	}
 
-	//uzviatel chce editovat novou stranku
+	//uzivatel chce editovat novou stranku
 	if (array_key_exists("new", $_GET)) {
 		$aktivniInstance = new Stranka("", "", "", "");
 	}
-	//chce editovat stranku
 	
+	//chce editovat stranku
 	if (array_key_exists("edit", $_GET)) {
 		$idStranky = $_GET["edit"];
 		$aktivniInstance = $poleStranek[$idStranky];
@@ -78,9 +79,9 @@ if (array_key_exists("jePrihlasen", $_SESSION)) {
 		exit;
 	}
 }
-
 ?>
 
+	
 <!DOCTYPE html>
 <html lang="en">
 
