@@ -7,7 +7,7 @@ $aktivniInstance = null;
 if (array_key_exists("login-submit", $_POST)) {
 	$jmenoUzivatele = $_POST["uzivatelske-jmeno"];
 	$hesloUzivatele = $_POST["uzivatelske-heslo"];
-	if ($jmenoUzivatele == "admin" && $hesloUzivatele == "cici123") {
+	if ($jmenoUzivatele == "admin" && $hesloUzivatele == "heslo123") {
 		$_SESSION["jePrihlasen"] = $jmenoUzivatele;
 	}
 }
